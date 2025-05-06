@@ -1,5 +1,5 @@
 import express from 'express';
-import { getProducts, getProductById, createProduct } from '../controllers/productContoller.js';
+import { getProducts, getProductById, createProduct, updateProduct } from '../controllers/productContoller.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 const router = express.Router();
 
@@ -9,6 +9,7 @@ router
     .post(protect, admin, createProduct);
 router
     .route('/:id')
-    .get(getProductById);
+    .get(getProductById)
+    .put(protect, admin, updateProduct);
 
 export default router;
