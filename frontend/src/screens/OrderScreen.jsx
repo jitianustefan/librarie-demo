@@ -64,7 +64,7 @@ const OrderScreen = () => {
         });
     }
     async function onApproveTest() {
-        await payOrder({ orderId, details: {payer:{}} });
+        await payOrder({ orderId, details: {payer:{}} }).unwrap();
         refetch();
         toast.success('Payment successful Test');
     }
@@ -95,7 +95,7 @@ const OrderScreen = () => {
 
     return isLoading ? <Loader /> 
     : error ? (
-    <Message variant='danger' />
+    <Message variant='danger'>{error?.data?.message || error.error }</Message>
     ) : (
     <>
         <h1>Order {order._id}</h1>
